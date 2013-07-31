@@ -47,7 +47,7 @@ Here's the FatFractal code:
 	    clazz: "Note",
 	    text: noteText
 	};
-	if (imagedata) newNote.picture = base64DecToArr(imagedata).buffer;
+	if (imagedata) newNote.picture = imagedata;
 
     ff.createObjAtUri(newNote, "/Note", function(result) {
         $.mobile.changePage("#home");
@@ -56,4 +56,4 @@ Here's the FatFractal code:
     });
     cleanUp();
 
-Now, we should note the `base64DecToArr` function is something we had to add in order to convert from a base64-encoded string to an `ArrayBuffer`. But that's really just a deficiency of JavaScript and PhoneGap; besides, if you read the image from file (as recommended) rather than memory, the `FileReader` API will easily give you an `ArrayBuffer`.
+The only other significant change was to switch to reading the image from the filesystem rather than receive it as a base64-encoded string, which is better practice anyway.
