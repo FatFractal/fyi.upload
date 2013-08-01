@@ -24,10 +24,13 @@ var app = {
         this.bindEvents();
 
         var ff = new FatFractal();
-        ff.setBaseUrl("http://localhost:8080/upload");
+        ff.setBaseUrl("http://fyi.fatfractal.com/upload");
         ff.setSimulateCookies(true);
-        ff.login("derp", "dederp", function(user) {
+        ff.login("derp", "DeDerp123", function(user) {
+            alert("logged in");
             console.log("logged in as " + user.guid);
+        }, function(code, msg) {
+            alert("error: " + msg);
         });
 
         $(document).on("pageshow", "#home", function(e, ui) {
@@ -102,7 +105,6 @@ var app = {
             }
             
             function gotPic(data) {
-                alert("got our fuckin data, size is " + data.byteLength);
                 imagedata = data;
                 $("#takePicBtn").text("Picture Taken!").button("refresh");
             }
